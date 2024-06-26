@@ -11,11 +11,28 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
+import org.testng.internal.thread.ThreadTimeoutException;
 
 public class ExpectedException {
 	
 	
-	@Test()
+	
+	
+	//Conside there is one sample test case inn my class.
+	//In that class, I have passed the attribute invocation count =2, invoucation timeout =10000
+	//If the test case executed by 2 times withing 10 seconds, it will considered as pass.
+	//If the execution is not completed within 10 seconds, it will throw threadTomeoutException, so the test script is failed.
+	//But if i like to hide this exception, I will use one attribute.
+	//that name is called as expectedExeptions.
+	//i have to pass this attribute inside the @Test
+	//Once I passed this attributes to @Test method, the test execution result will now failed, it will show the result as pass even the test execution is not completed within 10 seconds.
+	
+	
+	
+	
+	
+	
+	@Test(invocationCount = 3, invocationTimeOut = 1000, expectedExceptions = ThreadTimeoutException.class)
 	public void count()
 	{
 		// Launch Browser
@@ -36,7 +53,6 @@ public class ExpectedException {
 		//searchbox inspect
 		WebElement search = d.findElement(By.name("qe"));
 		search.sendKeys("Cricket", Keys.ENTER);
-		
 		
 		//Google la cricket nu type pani search pani vara adutha page la cricket apdinra word motha ethana time iruku nu count pana ezuthi iruka coding.
 		
